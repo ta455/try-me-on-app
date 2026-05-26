@@ -3,10 +3,11 @@ export default function OutfitCard({ outfit }) {
     <div
       style={{
         background: "#ffffff",
-        borderRadius: "16px",
-        padding: "16px",
-        marginBottom: "20px",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+        borderRadius: "20px",
+        overflow: "hidden",
+        marginBottom: "24px",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
+        border: "1px solid #eee7dc",
       }}
     >
       <img
@@ -14,17 +15,77 @@ export default function OutfitCard({ outfit }) {
         alt={outfit.name}
         style={{
           width: "100%",
-          borderRadius: "12px",
-          marginBottom: "12px",
+          height: "420px",
+          objectFit: "cover",
+          display: "block",
         }}
       />
-      <h2 style={{ fontSize: "1.2rem", marginBottom: "8px" }}>{outfit.name}</h2>
-      <p style={{ color: "#666", marginBottom: "8px" }}>
-        {outfit.culture} • {outfit.occasion}
-      </p>
-      <p style={{ marginBottom: "12px" }}>{outfit.description}</p>
-      <button style={{ marginRight: "10px" }}>Try On</button>
-      <button>Save</button>
+
+      <div style={{ padding: "18px" }}>
+        <p
+          style={{
+            fontSize: "0.85rem",
+            color: "#8b6f47",
+            fontWeight: "600",
+            marginBottom: "8px",
+            textTransform: "uppercase",
+            letterSpacing: "0.5px",
+          }}
+        >
+          {outfit.culture} • {outfit.occasion}
+        </p>
+
+        <h2
+          style={{
+            fontSize: "1.4rem",
+            marginBottom: "10px",
+            color: "#1f1f1f",
+          }}
+        >
+          {outfit.name}
+        </h2>
+
+        <p
+          style={{
+            fontSize: "0.98rem",
+            lineHeight: "1.6",
+            color: "#5c5348",
+            marginBottom: "16px",
+          }}
+        >
+          {outfit.description}
+        </p>
+
+        <div style={{ display: "flex", gap: "12px" }}>
+          <button
+            style={{
+              flex: 1,
+              padding: "12px",
+              borderRadius: "12px",
+              border: "none",
+              background: "#1f1f1f",
+              color: "#fff",
+              fontWeight: "600",
+            }}
+          >
+            Try On
+          </button>
+
+          <button
+            style={{
+              flex: 1,
+              padding: "12px",
+              borderRadius: "12px",
+              border: "1px solid #d9d1c7",
+              background: "#f8f5ef",
+              color: "#1f1f1f",
+              fontWeight: "600",
+            }}
+          >
+            Save
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
