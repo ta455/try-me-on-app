@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function OutfitCard({ outfit }) {
   return (
     <div
@@ -10,16 +12,18 @@ export default function OutfitCard({ outfit }) {
         border: "1px solid #eee7dc",
       }}
     >
-      <img
-        src={outfit.image}
-        alt={outfit.name}
-        style={{
-          width: "100%",
-          height: "420px",
-          objectFit: "cover",
-          display: "block",
-        }}
-      />
+      <Link to={`/outfit/${outfit.id}`}>
+        <img
+          src={outfit.image}
+          alt={outfit.name}
+          style={{
+            width: "100%",
+            height: "420px",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+      </Link>
 
       <div style={{ padding: "18px" }}>
         <p
@@ -57,19 +61,21 @@ export default function OutfitCard({ outfit }) {
         </p>
 
         <div style={{ display: "flex", gap: "12px" }}>
-          <button
-            style={{
-              flex: 1,
-              padding: "12px",
-              borderRadius: "12px",
-              border: "none",
-              background: "#1f1f1f",
-              color: "#fff",
-              fontWeight: "600",
-            }}
-          >
-            Try On
-          </button>
+          <Link to={`/try-on/${outfit.id}`} style={{ flex: 1 }}>
+            <button
+              style={{
+                width: "100%",
+                padding: "12px",
+                borderRadius: "12px",
+                border: "none",
+                background: "#1f1f1f",
+                color: "#fff",
+                fontWeight: "600",
+              }}
+            >
+              Try On
+            </button>
+          </Link>
 
           <button
             style={{
