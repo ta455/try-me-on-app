@@ -1,14 +1,16 @@
 import { useParams, Link } from "react-router-dom";
 import outfits from "../data/outfits";
+import useFavorites from "../hooks/useFavorites";
 
 export default function OutfitDetailPage() {
   const { id } = useParams();
   const outfit = outfits.find((item) => item.id === id);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   if (!outfit) {
     return <h1 style={{ padding: "20px" }}>Outfit not found</h1>;
   }
-
+  const saved = isFavorite(outfit.id);  
   return (
     <div style={{ padding: "24px", maxWidth: "600px", margin: "0 auto" }}>
       <Link
@@ -85,6 +87,8 @@ export default function OutfitDetailPage() {
         </Link>
 
         <button
+          type="button"
+          onClick={() => toggleFavorite(outfit.id)}
           style={{
             flex: 1,
             padding: "14px",
@@ -95,7 +99,7 @@ export default function OutfitDetailPage() {
             fontWeight: "600",
           }}
         >
-          Save
+          {saved ? "Saved" : "Save"}
         </button>
       </div>
     </div>

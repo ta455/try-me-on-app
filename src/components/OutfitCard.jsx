@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import useFavorites from "../hooks/useFavorites";
 
 export default function OutfitCard({ outfit }) {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const saved = isFavorite(outfit.id);
+
   return (
     <div
       style={{
@@ -78,6 +82,8 @@ export default function OutfitCard({ outfit }) {
           </Link>
 
           <button
+            type="button" 
+            onClick={() => toggleFavorite(outfit.id)}
             style={{
               flex: 1,
               padding: "12px",
@@ -87,8 +93,9 @@ export default function OutfitCard({ outfit }) {
               color: "#1f1f1f",
               fontWeight: "600",
             }}
+            onClick={() => toggleFavorite(outfit.id)}
           >
-            Save
+            {saved ? "Saved" : "Save"}
           </button>
         </div>
       </div>
