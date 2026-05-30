@@ -1,13 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import outfits from "../data/outfits";
+import useCamera from "../hooks/useCamera";
 
 export default function TryOnPage() {
   const { id } = useParams();
   const outfit = outfits.find((item) => item.id === id);
-
   const [overlaySize, setOverlaySize] = useState(70);
   const [overlayY, setOverlayY] = useState(0);
+  const { videoRef, cameraError } = useCamera();
 
   if (!outfit) {
     return <h1 style={{ padding: "20px" }}>Outfit not found</h1>;
@@ -79,41 +80,45 @@ export default function TryOnPage() {
             {outfit.culture} - {outfit.occasion}
           </p>
         </div>
-
         <div
           style={{
             position: "relative",
             height: "520px",
             borderRadius: "20px",
             overflow: "hidden",
-            background:
-              "linear-gradient(180deg, #4c4a45 0%, #2d2c2a 45%, #171717 100%)",
+            background: "#111",
             border: "1px solid rgba(255,255,255,0.12)",
             marginBottom: "18px",
           }}
         >
-          <div
-            style={{
-              position: "absolute",
-              inset: "20px",
-              border: "1px dashed rgba(255,255,255,0.25)",
-              borderRadius: "16px",
-            }}
-          />
-
-          <div
-            style={{
-              position: "absolute",
-              top: "42%",
-              left: "50%",
-              width: "120px",
-              height: "190px",
-              transform: "translate(-50%, -50%)",
-              borderRadius: "60px 60px 40px 40px",
-              background: "rgba(255,255,255,0.16)",
-              border: "1px solid rgba(255,255,255,0.2)",
-            }}
-          />
+          {cameraError ? (
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                padding: "24px",
+                color: "#d8d0c5",
+              }}
+            >
+              {cameraError}
+            </div>
+          ) : (
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                transform: "scaleX(-1)",
+              }}
+            />
+          )}
 
           <img
             src={outfit.overlay}
@@ -122,7 +127,7 @@ export default function TryOnPage() {
               position: "absolute",
               width: `${overlaySize}%`,
               left: "50%",
-              top: `50%`,
+              top: "50%",
               transform: `translate(-50%, calc(-50% + ${overlayY}px))`,
               pointerEvents: "none",
             }}
