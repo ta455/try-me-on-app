@@ -1,11 +1,21 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import outfits from "../data/outfits";
 import useCamera from "../hooks/useCamera";
 
 export default function TryOnPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const outfit = outfits.find((item) => item.id === id);
+  const currentIndex = outfits.findIndex((item) => item.id === id);
+
+  const previousOutfit =
+    currentIndex > 0 ? outfits[currentIndex - 1] : outfits[outfits.length - 1];
+
+  const nextOutfit =
+    currentIndex < outfits.length - 1 ? outfits[currentIndex + 1] : outfits[0];
+
   const [overlaySize, setOverlaySize] = useState(70);
   const [overlayY, setOverlayY] = useState(0);
   const { videoRef, cameraError } = useCamera();
@@ -28,6 +38,13 @@ export default function TryOnPage() {
 
   function moveDown() {
     setOverlayY((currentY) => currentY + 10);
+  }
+  function showPreviousOutfit() {
+    navigate(`/try-on/${previousOutfit.id}`);
+  }
+
+  function showNextOutfit() {
+    navigate(`/try-on/${nextOutfit.id}`);
   }
 
   return (
@@ -172,6 +189,30 @@ export default function TryOnPage() {
             style={controlButtonStyle}
           >
             Bigger
+          </button>
+        </div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "12px",
+            marginBottom: "12px",
+          }}
+        >
+          <button
+            type="button"
+            onClick={showPreviousOutfit}
+            style={controlButtonStyle}
+          >
+            Previous Outfit
+          </button>
+
+          <button
+            type="button"
+            onClick={showNextOutfit}
+            style={controlButtonStyle}
+          >
+            Next Outfit
           </button>
         </div>
 
