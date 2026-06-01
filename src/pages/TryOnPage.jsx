@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import html2canvas from "html2canvas";
 import outfits from "../data/outfits";
 import useCamera from "../hooks/useCamera";
 
@@ -18,6 +19,8 @@ export default function TryOnPage() {
 
   const [overlaySize, setOverlaySize] = useState(70);
   const [overlayY, setOverlayY] = useState(0);
+  const captureRef = useRef(null);
+  const [snapshot, setSnapshot] = useState("");
   const { videoRef, cameraError } = useCamera();
 
   if (!outfit) {
@@ -45,6 +48,24 @@ export default function TryOnPage() {
 
   function showNextOutfit() {
     navigate(`/try-on/${nextOutfit.id}`);
+  }
+
+  async function captureTryOn() {
+    if (!captureRef.current) {
+      return;
+    }
+
+    try {
+      const canvas = await html2canvas(captureRef.current, {
+        backgroundColor: null,
+        useCORS: true,
+      });
+
+      const imageData = canvas.toDataURL("image/png");
+      setSnapshot(imageData);
+    } catch {
+      alert("Snapshot could not be captured. Please try again.");
+    }
   }
 
   return (
@@ -98,6 +119,7 @@ export default function TryOnPage() {
           </p>
         </div>
         <div
+          ref={captureRef}
           style={{
             position: "relative",
             height: "520px",
@@ -215,6 +237,53 @@ export default function TryOnPage() {
             Next Outfit
           </button>
         </div>
+        <button
+          type="button"
+          onClick={captureTryOn}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "12px",
+            border: "none",
+            background: "#ffffff",
+            color: "#1f1f1f",
+            fontWeight: "700",
+            marginBottom: "12px",
+          }}
+        >
+          Capture Look
+        </button>
+
+        {snapshot && (
+          <div
+            style={{
+              background: "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.14)",
+              borderRadius: "16px",
+              padding: "12px",
+              marginBottom: "12px",
+            }}
+          >
+            <p
+              style={{
+                marginBottom: "10px",
+                color: "#f3d7a4",
+                fontWeight: "600",
+              }}
+            >
+              Snapshot Preview
+            </p>
+
+            <img
+              src={snapshot}
+              alt="Captured try-on"
+              style={{
+                width: "100%",
+                borderRadius: "12px",
+              }}
+            />
+          </div>
+        )}
 
         <Link to="/" style={{ display: "block" }}>
           <button
