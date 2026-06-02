@@ -49,6 +49,42 @@ export default function TryOnPage() {
   function showNextOutfit() {
     navigate(`/try-on/${nextOutfit.id}`);
   }
+  function downloadSnapshot() {
+    if (!snapshot) {
+      return;
+    }
+
+    const link = document.createElement("a");
+    link.href = snapshot;
+    link.download = `${outfit.id}-try-on.png`;
+    link.click();
+  }
+  async function shareSnapshot() {
+    if (!snapshot) {
+      return;
+    }
+
+    try {
+      const response = await fetch(snapshot);
+      const blob = await response.blob();
+
+      const file = new File([blob], `${outfit.id}-try-on.png`, {
+        type: "image/png",
+      });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: `Trying on ${outfit.name}`,
+          text: `Check out this ${outfit.name} look from TMO.`,
+          files: [file],
+        });
+      } else {
+        alert("Sharing is not supported in this browser. You can download the image instead.");
+      }
+    } catch {
+      alert("Snapshot could not be shared. Please try downloading it instead.");
+    }
+  }
 
   async function captureTryOn() {
     if (!captureRef.current) {
@@ -282,7 +318,46 @@ export default function TryOnPage() {
                 borderRadius: "12px",
               }}
             />
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "12px",
+                marginTop: "12px",
+              }}
+            >
+              <button
+                type="button"
+                onClick={downloadSnapshot}
+                style={{
+                  padding: "12px",
+                  borderRadius: "12px",
+                  border: "none",
+                  background: "#f3d7a4",
+                  color: "#1f1f1f",
+                  fontWeight: "700",
+                }}
+              >
+                Download
+              </button>
+
+              <button
+                type="button"
+                onClick={shareSnapshot}
+                style={{
+                  padding: "12px",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  background: "rgba(255,255,255,0.08)",
+                  color: "#fff",
+                  fontWeight: "700",
+                }}
+              >
+                Share
+              </button>
+            </div>
           </div>
+
         )}
 
         <Link to="/" style={{ display: "block" }}>
