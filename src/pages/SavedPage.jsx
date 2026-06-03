@@ -11,7 +11,7 @@ export default function SavedPage() {
   return (
     <div
       style={{
-        padding: "24px 16px 40px",
+        padding: "24px 16px 96px",
         maxWidth: "520px",
         margin: "0 auto",
       }}

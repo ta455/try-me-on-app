@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import outfits from "../data/outfits";
 import OutfitCard from "../components/OutfitCard";
 
@@ -6,23 +5,12 @@ export default function FeedPage() {
   return (
     <div
       style={{
-        padding: "24px 16px 40px",
+        padding: "24px 16px 96px",
         maxWidth: "520px",
         margin: "0 auto",
       }}
     >
       <div style={{ marginBottom: "24px" }}>
-        <Link
-          to="/saved"
-          style={{
-            display: "inline-block",
-            marginBottom: "18px",
-            color: "#8b6f47",
-            fontWeight: "600",
-          }}
-        >
-          View saved outfits
-        </Link>
         <p
           style={{
             fontSize: "0.9rem",
