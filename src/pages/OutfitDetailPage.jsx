@@ -10,7 +10,7 @@ export default function OutfitDetailPage() {
   if (!outfit) {
     return <h1 style={{ padding: "20px" }}>Outfit not found</h1>;
   }
-  const saved = isFavorite(outfit.id);  
+  const saved = isFavorite(outfit.id);
   return (
     <div style={{ padding: "24px", maxWidth: "600px", margin: "0 auto" }}>
       <Link
@@ -69,6 +69,21 @@ export default function OutfitDetailPage() {
         {outfit.description}
       </p>
 
+      <section style={{ marginTop: "24px" }}>
+        <h2>History</h2>
+        <p>{outfit.history}</p>
+      </section>
+
+      <section style={{ marginTop: "20px" }}>
+        <h2>Symbolism</h2>
+        <p>{outfit.symbolism}</p>
+      </section>
+
+      <section style={{ marginTop: "20px" }}>
+        <h2>Styling Notes</h2>
+        <p>{outfit.styling}</p>
+      </section>
+      
       <div style={{ display: "flex", gap: "12px" }}>
         <Link to={`/try-on/${outfit.id}`} style={{ flex: 1 }}>
           <button
