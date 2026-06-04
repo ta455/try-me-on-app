@@ -1,55 +1,61 @@
+import { useState } from "react";
 import outfits from "../data/outfits";
 import OutfitCard from "../components/OutfitCard";
 
 export default function FeedPage() {
+  const [searchText, setSearchText] = useState("");
+
+  const filteredOutfits = outfits.filter((outfit) => {
+    const searchableText = [
+      outfit.name,
+      outfit.culture,
+      outfit.occasion,
+      outfit.description,
+      outfit.history,
+      outfit.symbolism,
+      outfit.styling,
+      outfit.tags.join(" "),
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    return searchableText.includes(searchText.toLowerCase());
+  });
+
   return (
-    <div
-      style={{
-        padding: "24px 16px 96px",
-        maxWidth: "520px",
-        margin: "0 auto",
-      }}
-    >
-      <div style={{ marginBottom: "24px" }}>
-        <p
-          style={{
-            fontSize: "0.9rem",
-            color: "#8b6f47",
-            marginBottom: "8px",
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-            fontWeight: "600",
-          }}
-        >
-          Try Me On
+    <div style={{ padding: "20px", paddingBottom: "96px" }}>
+      <h1 style={{ marginBottom: "8px" }}>TMO Feed</h1>
+
+      <p style={{ color: "#6f6658", marginBottom: "18px" }}>
+        Discover cultural outfits and try them on instantly.
+      </p>
+
+      <input
+        type="text"
+        placeholder="Search outfits, cultures, occasions..."
+        value={searchText}
+        onChange={(event) => setSearchText(event.target.value)}
+        style={{
+          width: "100%",
+          padding: "14px 16px",
+          marginBottom: "20px",
+          borderRadius: "999px",
+          border: "1px solid #ddd0bd",
+          background: "#fffaf0",
+          fontSize: "1rem",
+          boxSizing: "border-box",
+        }}
+      />
+
+      {filteredOutfits.length > 0 ? (
+        filteredOutfits.map((outfit) => (
+          <OutfitCard key={outfit.id} outfit={outfit} />
+        ))
+      ) : (
+        <p style={{ textAlign: "center", color: "#7a7065", marginTop: "40px" }}>
+          No outfits found.
         </p>
-
-        <h1
-          style={{
-            fontSize: "2.2rem",
-            lineHeight: "1.2",
-            color: "#1f1f1f",
-            marginBottom: "10px",
-          }}
-        >
-          Explore Cultural Fashion
-        </h1>
-
-        <p
-          style={{
-            fontSize: "1rem",
-            lineHeight: "1.6",
-            color: "#5c5348",
-          }}
-        >
-          Discover beautiful traditional outfits, learn their meaning, and try
-          them on through a filter-like virtual experience.
-        </p>
-      </div>
-
-      {outfits.map((outfit) => (
-        <OutfitCard key={outfit.id} outfit={outfit} />
-      ))}
+      )}
     </div>
   );
 }
