@@ -4,6 +4,7 @@ import OutfitDetailPage from "./pages/OutfitDetailPage";
 import TryOnPage from "./pages/TryOnPage";
 import SavedPage from "./pages/SavedPage";
 import BottomNav from "./components/BottomNav";
+import PreferencesPage from "./pages/PreferencesPage";  
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/outfit/:id" element={<OutfitDetailPage />} />
             <Route path="/try-on/:id" element={<TryOnPage />} />
             <Route path="/saved" element={<SavedPage />} />
+            <Route path="/preferences" element={<PreferencesPage />} />
           </Routes>
         </main>
         <BottomNav />

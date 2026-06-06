@@ -51,6 +51,19 @@ export default function BottomNav() {
       >
         Saved
       </Link>
+      <Link
+        to="/preferences"
+        style={{
+          textDecoration: "none",
+          color: location.pathname === "/preferences" ? "#ffffff" : "#5f5548",
+          background: location.pathname === "/preferences" ? "#1f1f1f" : "transparent",
+          padding: "12px 24px",
+          borderRadius: "14px",
+          fontWeight: "700",
+        }}
+      >
+        Preferences
+      </Link>
     </nav>
   );
 }

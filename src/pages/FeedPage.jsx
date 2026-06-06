@@ -2,6 +2,7 @@ import useFavorites from "../hooks/useFavorites";
 import { useState } from "react";
 import outfits from "../data/outfits";
 import OutfitCard from "../components/OutfitCard";
+import usePreferences from "../hooks/usePreferences";
 
 const filters = [
   "All",
@@ -20,6 +21,8 @@ export default function FeedPage() {
   const [searchText, setSearchText] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const { favoriteIds } = useFavorites();
+  const { preferences } = usePreferences();
+
 
   const favoriteOutfits = outfits.filter((outfit) =>
     favoriteIds.includes(outfit.id)
@@ -27,13 +30,38 @@ export default function FeedPage() {
 
   const favoriteTags = favoriteOutfits.flatMap((outfit) => outfit.tags);
 
+  const preferenceWords = preferences.map((preference) =>
+    preference.toLowerCase().replaceAll(" ", "-")
+  );
+
   const recommendedOutfits = outfits
     .filter((outfit) => !favoriteIds.includes(outfit.id))
-    .filter((outfit) =>
-      outfit.tags.some((tag) => favoriteTags.includes(tag))
-    )
+    .filter((outfit) => {
+      const outfitText = [
+        outfit.name,
+        outfit.culture,
+        outfit.occasion,
+        outfit.description,
+        outfit.history,
+        outfit.symbolism,
+        outfit.styling,
+        outfit.tags.join(" "),
+      ]
+        .join(" ")
+        .toLowerCase();
 
+      const matchesSavedTags = outfit.tags.some((tag) =>
+        favoriteTags.includes(tag)
+      );
+
+      const matchesPreferences = preferenceWords.some((preference) =>
+        outfitText.includes(preference)
+      );
+
+      return matchesSavedTags || matchesPreferences;
+    })
     .slice(0, 2);
+
   const filteredOutfits = outfits.filter((outfit) => {
     const searchableText = [
       outfit.name,
