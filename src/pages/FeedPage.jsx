@@ -60,7 +60,7 @@ export default function FeedPage() {
 
       return matchesSavedTags || matchesPreferences;
     })
-    .slice(0, 2);
+    .slice(0, 2);3
 
   const filteredOutfits = outfits.filter((outfit) => {
     const searchableText = [
