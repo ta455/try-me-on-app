@@ -1,69 +1,39 @@
 import { Link, useLocation } from "react-router-dom";
 
+const navItems = [
+  { label: "Feed", path: "/" },
+  { label: "Saved", path: "/saved" },
+  { label: "Prefs", path: "/preferences" },
+  { label: "About", path: "/about" },
+];
+
 export default function BottomNav() {
   const location = useLocation();
 
-  function isActive(path) {
-    return location.pathname === path;
-  }
-
   return (
-    <nav className="bottom-nav"
-      style={{
-        position: "sticky",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "8px",
-        padding: "10px 14px",
-        background: "rgba(248, 245, 239, 0.96)",
-        borderTop: "1px solid #e6ddd0",
-        backdropFilter: "blur(10px)",
-        zIndex: 20,
-      }}
-    >
-      <Link
-        to="/"
-        style={{
-          textAlign: "center",
-          padding: "12px",
-          borderRadius: "12px",
-          fontWeight: "700",
-          background: isActive("/") ? "#1f1f1f" : "transparent",
-          color: isActive("/") ? "#fff" : "#5c5348",
-        }}
-      >
-        Feed
-      </Link>
+    <nav className="bottom-nav">
+      {navItems.map((item) => {
+        const isActive = location.pathname === item.path;
 
-      <Link
-        to="/saved"
-        style={{
-          textAlign: "center",
-          padding: "12px",
-          borderRadius: "12px",
-          fontWeight: "700",
-          background: isActive("/saved") ? "#1f1f1f" : "transparent",
-          color: isActive("/saved") ? "#fff" : "#5c5348",
-        }}
-      >
-        Saved
-      </Link>
-      <Link
-        to="/preferences"
-        style={{
-          textDecoration: "none",
-          color: location.pathname === "/preferences" ? "#ffffff" : "#5f5548",
-          background: location.pathname === "/preferences" ? "#1f1f1f" : "transparent",
-          padding: "12px 24px",
-          borderRadius: "14px",
-          fontWeight: "700",
-        }}
-      >
-        Preferences
-      </Link>
+        return (
+          <Link
+            key={item.path}
+            to={item.path}
+            style={{
+              textDecoration: "none",
+              color: isActive ? "#ffffff" : "#5f5548",
+              background: isActive ? "#1f1f1f" : "transparent",
+              padding: "10px 0",
+              borderRadius: "14px",
+              fontWeight: "700",
+              textAlign: "center",
+              fontSize: "0.9rem",
+            }}
+          >
+            {item.label}
+          </Link>
+        );
+      })}
     </nav>
   );
 }
