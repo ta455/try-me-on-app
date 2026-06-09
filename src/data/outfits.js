@@ -1,3 +1,4 @@
+const assetBase = import.meta.env.BASE_URL;
 const outfits = [
   {
     id: "khmer-dress",
@@ -12,8 +13,8 @@ const outfits = [
       "The gold color often represents elegance, celebration, respect, and importance during formal events.",
     styling:
       "This outfit is usually styled with detailed jewelry, silk fabric, and carefully arranged accessories.",
-    image: "/outfits/khmer-dress.jpg",
-    overlay: "/outfits/khmer-dress.png",
+    image: `${assetBase}/outfits/khmer-dress.jpg`,
+    overlay: `${assetBase}/outfits/khmer-dress.png`,
     tags: ["traditional", "ceremonial", "southeast-asia"],
   },
   {
@@ -29,8 +30,8 @@ const outfits = [
       "Kimono patterns, colors, and fabrics can represent season, age, status, and the type of occasion.",
     styling:
       "A kimono is commonly styled with an obi belt and traditional sandals, creating a graceful layered look.",
-    image: "/outfits/kimono.jpg",
-    overlay: "/outfits/kimono.png",
+    image: `${assetBase}/outfits/kimono.jpg`,
+    overlay: `${assetBase}/outfits/kimono.png`,
     tags: ["traditional", "formal", "east-asia"],
   },
   {
@@ -46,8 +47,8 @@ const outfits = [
       "The bright colors and flowing shape often represent joy, harmony, and respect for tradition.",
     styling:
       "Hanbok is usually styled with a short jacket, full skirt or pants, and soft balanced colors.",
-    image: "/outfits/hanbok.jpg",
-    overlay: "/outfits/hanbok.png",
+    image: `${assetBase}/outfits/hanbok.jpg`,
+    overlay: `${assetBase}/outfits/hanbok.png`,
     tags: ["traditional", "celebration", "east-asia"],
   },
   {
@@ -63,8 +64,8 @@ const outfits = [
       "Colors, fabric, and embroidery can represent celebration, family tradition, religion, and regional identity.",
     styling:
       "A sari is commonly styled with a blouse, jewelry, and pleated or draped fabric across the body.",
-    image: "/outfits/sari.jpg",
-    overlay: "/outfits/sari.png",
+    image: `${assetBase}/outfits/sari.jpg`,
+    overlay: `${assetBase}/outfits/sari.png`,
     tags: ["traditional", "festive", "south-asia"],
   },
 ];
