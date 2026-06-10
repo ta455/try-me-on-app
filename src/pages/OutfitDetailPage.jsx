@@ -112,6 +112,36 @@ export default function OutfitDetailPage() {
         <h2>Styling Notes</h2>
         <p>{outfit.styling}</p>
       </section>
+      <section style={{ marginTop: "20px", marginBottom: "24px" }}>
+        <h2>Find Similar Styles</h2>
+
+        <p style={{ color: "#5c5348", lineHeight: "1.7", marginBottom: "12px" }}>
+          Explore clothing inspired by this outfit style.
+        </p>
+
+        <a
+          href={`https://www.google.com/search?tbm=shop&q=${encodeURIComponent(
+            outfit.shoppingSearch
+          )}`}
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            display: "inline-block",
+            width: "100%",
+            textAlign: "center",
+            padding: "14px",
+            borderRadius: "12px",
+            background: "#fffaf0",
+            color: "#1f1f1f",
+            border: "1px solid #d9d1c7",
+            fontWeight: "700",
+            textDecoration: "none",
+            boxSizing: "border-box",
+          }}
+        >
+          Search Similar Clothing
+        </a>
+      </section>
 
       <div style={{ display: "flex", gap: "12px", marginTop: "24px" }}>
         <Link to={`/try-on/${outfit.id}`} style={{ flex: 1 }}>
