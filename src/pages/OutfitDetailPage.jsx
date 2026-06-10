@@ -112,6 +112,20 @@ export default function OutfitDetailPage() {
         <h2>Styling Notes</h2>
         <p>{outfit.styling}</p>
       </section>
+      <section
+        style={{
+          marginTop: "20px",
+          padding: "16px",
+          borderRadius: "16px",
+          background: "#fff3d8",
+          border: "1px solid #ead5a8",
+        }}
+      >
+        <h2 style={{ marginTop: 0 }}>Cultural Note</h2>
+        <p style={{ color: "#5c5348", lineHeight: "1.7", marginBottom: 0 }}>
+          {outfit.culturalNote}
+        </p>
+      </section>
       <section style={{ marginTop: "20px", marginBottom: "24px" }}>
         <h2>Find Similar Styles</h2>
 

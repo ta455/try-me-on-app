@@ -13,6 +13,8 @@ const outfits = [
       "The gold color often represents elegance, celebration, respect, and importance during formal events.",
     styling:
       "This outfit is usually styled with detailed jewelry, silk fabric, and carefully arranged accessories.",
+    culturalNote:
+      "This outfit is connected to Cambodian cultural identity and formal celebration. It should be presented with respect for its traditional meaning.",
     shoppingSearch: "Cambodian traditional dress",
     image: `${assetBase}/outfits/khmer-dress.jpg`,
     overlay: `${assetBase}/outfits/khmer-dress.png`,
@@ -31,6 +33,8 @@ const outfits = [
       "Kimono patterns, colors, and fabrics can represent season, age, status, and the type of occasion.",
     styling:
       "A kimono is commonly styled with an obi belt and traditional sandals, creating a graceful layered look.",
+    culturalNote:
+      "The kimono carries cultural and historical meaning in Japan. Patterns, colors, and styling may vary depending on season, age, and occasion.",
     shoppingSearch: "Japanese traditional kimono",
     image: `${assetBase}/outfits/kimono.jpg`,
     overlay: `${assetBase}/outfits/kimono.png`,
@@ -49,7 +53,9 @@ const outfits = [
       "The bright colors and flowing shape often represent joy, harmony, and respect for tradition.",
     styling:
       "Hanbok is usually styled with a short jacket, full skirt or pants, and soft balanced colors.",
-    shoppingSearch: "Korean traditional hanbok",  
+    culturalNote:
+      "Hanbok is an important part of Korean cultural heritage and is often worn during holidays, weddings, and traditional celebrations.",
+    shoppingSearch: "Korean traditional hanbok",
     image: `${assetBase}/outfits/hanbok.jpg`,
     overlay: `${assetBase}/outfits/hanbok.png`,
     tags: ["traditional", "celebration", "east-asia"],
@@ -67,6 +73,8 @@ const outfits = [
       "Colors, fabric, and embroidery can represent celebration, family tradition, religion, and regional identity.",
     styling:
       "A sari is commonly styled with a blouse, jewelry, and pleated or draped fabric across the body.",
+    culturalNote:
+      "The sari has many regional styles across South Asia. Its fabric, drape, and design can reflect identity, tradition, and occasion.",
     shoppingSearch: "Indian traditional sari",
     image: `${assetBase}/outfits/sari.jpg`,
     overlay: `${assetBase}/outfits/sari.png`,
