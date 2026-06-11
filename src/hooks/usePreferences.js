@@ -26,9 +26,12 @@ export default function usePreferences() {
       setPreferences([...preferences, preference]);
     }
   }
-
+  function clearPreferences() {
+    setPreferences([]);
+  }
   return {
     preferences,
     togglePreference,
+    clearPreferences,
   };
 }

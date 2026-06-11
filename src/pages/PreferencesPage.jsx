@@ -16,7 +16,7 @@ const preferenceOptions = [
 ];
 
 export default function PreferencesPage() {
-  const { preferences, togglePreference } = usePreferences();
+  const { preferences, togglePreference, clearPreferences } = usePreferences();
 
   return (
     <div style={{ padding: "20px", paddingBottom: "96px" }}>
@@ -25,7 +25,30 @@ export default function PreferencesPage() {
       <p style={{ color: "#6f6658", marginBottom: "20px" }}>
         Choose styles and cultures you want to see more often.
       </p>
-
+      <p style={{ color: "#6f6658", marginBottom: "16px" }}>
+        {preferences.length === 0
+          ? "No preferences selected yet."
+          : `Selected preferences: ${preferences.join(", ")}`}
+      </p>
+      {preferences.length > 0 && (
+        <button
+          type="button"
+          onClick={clearPreferences}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "12px",
+            border: "1px solid #d9d1c7",
+            background: "#fffaf0",
+            color: "#1f1f1f",
+            fontWeight: "700",
+            marginBottom: "20px",
+            cursor: "pointer",
+          }}
+        >
+          Reset Preferences
+        </button>
+      )}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
         {preferenceOptions.map((preference) => {
           const isSelected = preferences.includes(preference);

@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import outfits from "../data/outfits";
+import OutfitCard from "../components/OutfitCard";
 import useFavorites from "../hooks/useFavorites";
 
 export default function SavedPage() {
-  const { favoriteIds, removeFavorite } = useFavorites();
+  const { favoriteIds, removeFavorite, clearFavorites } = useFavorites();
   const savedOutfits = outfits.filter((outfit) =>
     favoriteIds.includes(outfit.id)
   );
+  const savedCount = savedOutfits.length;
 
   return (
     <div
@@ -52,6 +54,30 @@ export default function SavedPage() {
         >
           Saved Outfits
         </h1>
+        <p style={{ color: "#6f6658", marginBottom: "16px" }}>
+          {savedCount === 1
+            ? "You have 1 saved outfit."
+            : `You have ${savedCount} saved outfits.`}
+        </p>
+        {savedCount > 0 && (
+          <button
+            type="button"
+            onClick={clearFavorites}
+            style={{
+              width: "100%",
+              padding: "14px",
+              borderRadius: "12px",
+              border: "1px solid #d9d1c7",
+              background: "#fffaf0",
+              color: "#1f1f1f",
+              fontWeight: "700",
+              marginBottom: "20px",
+              cursor: "pointer",
+            }}
+          >
+            Clear Saved Outfits
+          </button>
+        )}
 
         <p
           style={{

@@ -37,11 +37,14 @@ export default function useFavorites() {
       currentIds.filter((currentId) => currentId !== id)
     );
   }
-
+  function clearFavorites() {
+    setFavoriteIds([]);
+  }
   return {
     favoriteIds,
     isFavorite,
     toggleFavorite,
     removeFavorite,
+    clearFavorites,
   };
 }
