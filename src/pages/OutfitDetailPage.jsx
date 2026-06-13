@@ -1,16 +1,25 @@
 import { useParams, Link } from "react-router-dom";
 import outfits from "../data/outfits";
 import useFavorites from "../hooks/useFavorites";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useViewHistory from "../hooks/useViewHistory";
 
 export default function OutfitDetailPage() {
   const { id } = useParams();
   const outfit = outfits.find((item) => item.id === id);
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { addViewedOutfit } = useViewHistory();
   const [shareMessage, setShareMessage] = useState("");
+  
+  useEffect(() => {
+    if (outfit) {
+      addViewedOutfit(outfit.id);
+    }
+  }, [outfit?.id]);
   if (!outfit) {
     return <h1 style={{ padding: "20px" }}>Outfit not found</h1>;
   }
+
   const saved = isFavorite(outfit.id);
   async function shareOutfit() {
     const outfitUrl = window.location.href;

@@ -3,6 +3,7 @@ import { useState } from "react";
 import outfits from "../data/outfits";
 import OutfitCard from "../components/OutfitCard";
 import usePreferences from "../hooks/usePreferences";
+import useViewHistory from "../hooks/useViewHistory";
 
 const filters = [
   "All",
@@ -22,7 +23,7 @@ export default function FeedPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const { favoriteIds } = useFavorites();
   const { preferences } = usePreferences();
-
+  const { viewedIds, clearViewHistory } = useViewHistory();
 
   const favoriteOutfits = outfits.filter((outfit) =>
     favoriteIds.includes(outfit.id)
@@ -60,7 +61,11 @@ export default function FeedPage() {
 
       return matchesSavedTags || matchesPreferences;
     })
-    .slice(0, 2);3
+    .slice(0, 2);
+
+  const recentlyViewedOutfits = viewedIds
+    .map((id) => outfits.find((outfit) => outfit.id === id))
+    .filter(Boolean);
 
   const filteredOutfits = outfits.filter((outfit) => {
     const searchableText = [
@@ -143,6 +148,40 @@ export default function FeedPage() {
           <h2 style={{ marginBottom: "12px" }}>Recommended For You</h2>
 
           {recommendedOutfits.map((outfit) => (
+            <OutfitCard key={outfit.id} outfit={outfit} />
+          ))}
+        </section>
+      )}
+      {recentlyViewedOutfits.length > 0 && (
+        <section style={{ marginBottom: "24px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "12px",
+              marginBottom: "12px",
+            }}
+          >
+            <h2 style={{ margin: 0 }}>Recently Viewed</h2>
+
+            <button
+              type="button"
+              onClick={clearViewHistory}
+              style={{
+                border: "1px solid #d9d1c7",
+                background: "#fffaf0",
+                borderRadius: "999px",
+                padding: "8px 12px",
+                fontWeight: "700",
+                cursor: "pointer",
+              }}
+            >
+              Clear
+            </button>
+          </div>
+
+          {recentlyViewedOutfits.map((outfit) => (
             <OutfitCard key={outfit.id} outfit={outfit} />
           ))}
         </section>
