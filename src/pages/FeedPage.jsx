@@ -5,18 +5,7 @@ import OutfitCard from "../components/OutfitCard";
 import usePreferences from "../hooks/usePreferences";
 import useViewHistory from "../hooks/useViewHistory";
 
-const filters = [
-  "All",
-  "Cambodia",
-  "Japan",
-  "Korea",
-  "India",
-  "Traditional",
-  "Formal",
-  "Ceremonial",
-  "Celebration",
-  "Festive",
-];
+const filters = ["All", "Cambodia", "Japan", "Korea", "India", "Vietnam", "Nigeria", "China", "Traditional", "Formal", "Ceremonial"]
 
 export default function FeedPage() {
   const [searchText, setSearchText] = useState("");
