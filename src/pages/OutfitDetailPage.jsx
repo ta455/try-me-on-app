@@ -15,7 +15,7 @@ export default function OutfitDetailPage() {
     if (outfit) {
       addViewedOutfit(outfit.id);
     }
-  }, [outfit?.id]);
+  }, [addViewedOutfit, outfit]);
   
   if (!outfit) {
     return <h1 style={{ padding: "20px" }}>Outfit not found</h1>;

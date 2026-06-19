@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "tmo-view-history";
 
@@ -19,12 +19,12 @@ export default function useViewHistory() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(viewedIds));
   }, [viewedIds]);
 
-  function addViewedOutfit(outfitId) {
+  const addViewedOutfit = useCallback((outfitId) => {
     setViewedIds((currentIds) => {
       const withoutDuplicate = currentIds.filter((id) => id !== outfitId);
       return [outfitId, ...withoutDuplicate].slice(0, 5);
     });
-  }
+  }, []);
 
   function clearViewHistory() {
     setViewedIds([]);

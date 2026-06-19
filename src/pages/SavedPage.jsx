@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import outfits from "../data/outfits";
-import OutfitCard from "../components/OutfitCard";
 import useFavorites from "../hooks/useFavorites";
 
 export default function SavedPage() {

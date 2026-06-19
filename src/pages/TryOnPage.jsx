@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import outfits from "../data/outfits";
 import useCamera from "../hooks/useCamera";
