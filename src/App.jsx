@@ -5,8 +5,8 @@ import TryOnPage from "./pages/TryOnPage";
 import SavedPage from "./pages/SavedPage";
 import BottomNav from "./components/BottomNav";
 import PreferencesPage from "./pages/PreferencesPage";
-import AboutPage from "./pages/AboutPage";  // Import the AboutPage component
-
+import AboutPage from "./pages/AboutPage"; 
+import AuthPage from "./pages/AuthPage";  
 
 
 
@@ -23,6 +23,7 @@ function App() {
             <Route path="/preferences" element={<PreferencesPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/account" element={<AuthPage />} />
           </Routes>
         </main>
         <BottomNav />

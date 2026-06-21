@@ -4,7 +4,8 @@ const navItems = [
   { label: "Feed", path: "/" },
   { label: "Saved", path: "/saved" },
   { label: "Prefs", path: "/preferences" },
-  { label: "About", path: "/about" },
+  { label: "Info", path: "/about" },
+  { label: "Acct", path: "/account" },
 ];
 
 export default function BottomNav() {
@@ -27,7 +28,7 @@ export default function BottomNav() {
               borderRadius: "14px",
               fontWeight: "700",
               textAlign: "center",
-              fontSize: "0.9rem",
+              fontSize: "0.78rem",
             }}
           >
             {item.label}
