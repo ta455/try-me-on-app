@@ -5,9 +5,9 @@ import TryOnPage from "./pages/TryOnPage";
 import SavedPage from "./pages/SavedPage";
 import BottomNav from "./components/BottomNav";
 import PreferencesPage from "./pages/PreferencesPage";
-import AboutPage from "./pages/AboutPage"; 
-import AuthPage from "./pages/AuthPage";  
-
+import AboutPage from "./pages/AboutPage";
+import AuthPage from "./pages/AuthPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 function App() {
@@ -18,9 +18,32 @@ function App() {
           <Routes>
             <Route path="/" element={<FeedPage />} />
             <Route path="/outfit/:id" element={<OutfitDetailPage />} />
-            <Route path="/try-on/:id" element={<TryOnPage />} />
-            <Route path="/saved" element={<SavedPage />} />
-            <Route path="/preferences" element={<PreferencesPage />} />
+            <Route
+              path="/try-on/:id"
+              element={
+                <ProtectedRoute>
+                  <TryOnPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/saved"
+              element={
+                <ProtectedRoute>
+                  <SavedPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/preferences"
+              element={
+                <ProtectedRoute>
+                  <PreferencesPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
             <Route path="/account" element={<AuthPage />} />

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function AuthPage() {
   const { user, authLoading, signUp, logIn, logOut } = useAuth();
@@ -8,6 +9,9 @@ export default function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const returnPath = location.state?.from || "/";
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -24,6 +28,7 @@ export default function AuthPage() {
 
       setEmail("");
       setPassword("");
+      navigate(returnPath);
     } catch (error) {
       setMessage(error.message);
     }
