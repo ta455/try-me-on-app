@@ -1,4 +1,4 @@
-import useFavorites from "../hooks/useFavorites";
+import useCloudFavorites from "../hooks/useCloudFavorites";
 import { useState } from "react";
 import outfits from "../data/outfits";
 import OutfitCard from "../components/OutfitCard";
@@ -10,7 +10,7 @@ const filters = ["All", "Cambodia", "Japan", "Korea", "India", "Vietnam", "Niger
 export default function FeedPage() {
   const [searchText, setSearchText] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
-  const { favoriteIds } = useFavorites();
+  const { favoriteIds } = useCloudFavorites();
   const { preferences } = usePreferences();
   const { viewedIds, clearViewHistory } = useViewHistory();
 

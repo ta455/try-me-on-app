@@ -1,13 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import outfits from "../data/outfits";
-import useFavorites from "../hooks/useFavorites";
+import useCloudFavorites from "../hooks/useCloudFavorites";
 import { useState, useEffect } from "react";
 import useViewHistory from "../hooks/useViewHistory";
 
 export default function OutfitDetailPage() {
   const { id } = useParams();
   const outfit = outfits.find((item) => item.id === id);
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const { isFavorite, toggleFavorite } = useCloudFavorites();
   const { addViewedOutfit } = useViewHistory();
   const [shareMessage, setShareMessage] = useState("");
   

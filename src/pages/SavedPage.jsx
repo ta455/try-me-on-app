@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import outfits from "../data/outfits";
-import useFavorites from "../hooks/useFavorites";
+import useCloudFavorites from "../hooks/useCloudFavorites";
 
 export default function SavedPage() {
-  const { favoriteIds, removeFavorite, clearFavorites } = useFavorites();
+  ​const {
+    favoriteIds,
+    removeFavorite,
+    clearFavorites,
+    favoritesLoading,
+  } = useCloudFavorites();
+
+  if (favoritesLoading) {
+    return <p style={{ padding: "20px" }}>Loading saved outfits...</p>;
+  }
   const savedOutfits = outfits.filter((outfit) =>
     favoriteIds.includes(outfit.id)
   );
