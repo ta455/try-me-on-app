@@ -4,7 +4,7 @@ Try Me On is a cultural fashion discovery app where users explore outfits throug
 
 ## Live Demo
 
-https://ta455.github.io/try-me-on-app/
+https://ta455.vercel.app/try-me-on-app/
 
 ## Features
 
