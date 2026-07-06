@@ -3,6 +3,7 @@ import outfits from "../data/outfits";
 import useCloudFavorites from "../hooks/useCloudFavorites";
 import { useState, useEffect } from "react";
 import useViewHistory from "../hooks/useViewHistory";
+import { trackEvent } from "../utils/trackEvent";
 
 export default function OutfitDetailPage() {
   const { id } = useParams();
@@ -10,13 +11,14 @@ export default function OutfitDetailPage() {
   const { isFavorite, toggleFavorite } = useCloudFavorites();
   const { addViewedOutfit } = useViewHistory();
   const [shareMessage, setShareMessage] = useState("");
-  
+
   useEffect(() => {
     if (outfit) {
       addViewedOutfit(outfit.id);
+      trackEvent("detail_view", outfit.id);
     }
   }, [addViewedOutfit, outfit]);
-  
+
   if (!outfit) {
     return <h1 style={{ padding: "20px" }}>Outfit not found</h1>;
   }
@@ -180,6 +182,10 @@ export default function OutfitDetailPage() {
               fontWeight: "700",
               fontSize: "1rem",
             }}
+            onClick={() => {
+              trackEvent("try_on", outfit.id); // add this line
+              navigate(`/try-on/${outfit.id}`);
+            }}
           >
             Try On
           </button>
@@ -187,7 +193,11 @@ export default function OutfitDetailPage() {
 
         <button
           type="button"
-          onClick={() => toggleFavorite(outfit.id)}
+          onClick={() => {
+            const action = isFavorite(outfit.id) ? "unsave" : "save";
+            trackEvent(action, outfit.id); // add this line
+            toggleFavorite(outfit.id);
+          }}
           style={{
             flex: 1,
             padding: "14px",
@@ -199,7 +209,7 @@ export default function OutfitDetailPage() {
             fontSize: "1rem",
           }}
         >
-          {saved ? "Saved" : "Save"}
+          {isFavorite(outfit.id) ? "Saved" : "Save"}
         </button>
       </div>
 

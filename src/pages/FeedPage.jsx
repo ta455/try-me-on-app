@@ -4,6 +4,7 @@ import outfits from "../data/outfits";
 import OutfitCard from "../components/OutfitCard";
 import usePreferences from "../hooks/usePreferences";
 import useViewHistory from "../hooks/useViewHistory";
+import { trackEvent } from "../utils/trackEvent";
 
 const filters = ["All", "Cambodia", "Japan", "Korea", "India", "Vietnam", "Nigeria", "China", "Traditional", "Formal", "Ceremonial"]
 
@@ -153,7 +154,7 @@ export default function FeedPage() {
             }}
           >
             <h2 style={{ margin: 0 }}>Recently Viewed</h2>
-
+            
             <button
               type="button"
               onClick={clearViewHistory}

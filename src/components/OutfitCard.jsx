@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useCloudFavorites from "../hooks/useCloudFavorites";
+import { trackEvent } from "../utils/trackEvent";
 
 export default function OutfitCard({ outfit }) {
   const { isFavorite, toggleFavorite } = useCloudFavorites();
@@ -83,7 +84,10 @@ export default function OutfitCard({ outfit }) {
 
           <button
             type="button"
-            onClick={() => toggleFavorite(outfit.id)}
+            onClick={() => {
+              trackEvent("favorite_outfit", { outfitId: outfit.id, saved: !saved });
+              toggleFavorite(outfit.id)
+            }}
             style={{
               flex: 1,
               padding: "12px",
