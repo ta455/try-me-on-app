@@ -8,7 +8,7 @@ import PreferencesPage from "./pages/PreferencesPage";
 import AboutPage from "./pages/AboutPage";
 import AuthPage from "./pages/AuthPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -47,6 +47,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
             <Route path="/account" element={<AuthPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </main>
         <BottomNav />

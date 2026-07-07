@@ -6,6 +6,7 @@ const navItems = [
   { label: "Prefs", path: "/preferences" },
   { label: "Info", path: "/about" },
   { label: "Acct", path: "/account" },
+  { path: "/profile", icon: "👤", label: "Profile" }
 ];
 
 export default function BottomNav() {
